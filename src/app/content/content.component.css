@@ -1,0 +1,11 @@
+*{
+  border:solid 1px red;
+}
+
+#content{
+  margin-left:400px;
+  margin-right: 25px;
+  min-width: 500px;
+  height: 100%;
+}
+
