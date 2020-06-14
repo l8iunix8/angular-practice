@@ -1,0 +1,9 @@
+.Tag{
+  padding:3px;
+  margin:5px;
+  background-color: rgb(106, 112, 108);
+  color: rgb(192, 160, 207);
+  border-radius: 5px;
+  display: block;
+  float: left;
+}
