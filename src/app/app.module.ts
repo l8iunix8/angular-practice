@@ -9,7 +9,8 @@ import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { ArticleComponent } from './article/article.component';
 import { ArticleTagComponent } from './article-tag/article-tag.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import {ApiService} from './api.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,9 +23,10 @@ import { ArticleTagComponent } from './article-tag/article-tag.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

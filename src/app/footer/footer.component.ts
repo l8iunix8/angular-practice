@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  @Input() page = 1;
 
-  ngOnInit(): void {
+  @Output() changePage = new EventEmitter<string>();
+
+  ngOnInit(): void {}
+
+  switchPage(status:string){
+    this.changePage.emit(status);
   }
-
 }

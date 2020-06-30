@@ -1,12 +1,8 @@
 <div id="content">
-  <app-article></app-article>
-  <app-article></app-article>
-  <app-article></app-article>
-  <app-article></app-article>
-  <app-article></app-article>
-  <app-article></app-article>
-  <app-article></app-article>
-  <app-article></app-article>
-  <app-article></app-article>
-  <app-article></app-article>
+  <ng-container *ngFor="let id of articleArray">
+    <app-article [articleDataID]="id"></app-article>
+  </ng-container>
+
+
+  <app-footer (changePage)="changePage($event)" [page]="page"></app-footer>
 </div>
