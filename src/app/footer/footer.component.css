@@ -20,6 +20,13 @@
   display: inline-block;
 }
 
+.block{
+  width:20px;
+  text-align: center;
+  display: inline-block;
+  visibility: hidden;
+}
+
 #square{
   margin:1px auto;
   width:70px;

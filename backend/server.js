@@ -19,9 +19,14 @@ app.get("/", (req, res) => {
   res.send('HelloWorld');
 });
 
+app.get("/api/totalDataCount",(req,res)=>{
+  res.send(String(article.length))
+})
+
 app.get("/api/:id", (req, res) => {
   res.send(article[req.params.id])
 });
+
 
 app.listen(4999, () => {
   console.log("listening port 4999");

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from '../api/api.service';
 
 @Component({
   selector: 'app-article',
@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
 })
 export class ArticleComponent implements OnInit {
   constructor(private service: ApiService) {}
-
+  
   @Input() articleDataID: string;
   data = {};
 

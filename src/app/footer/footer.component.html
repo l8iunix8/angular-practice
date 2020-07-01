@@ -1,7 +1,9 @@
 <div id="footer">
   <div id="square">
-  <div class="changePage" (click)="switchPage('-')"><<</div>
+  <div class="changePage" (click)="switchPage('-')" *ngIf="page!==1"><<</div>
+  <div class="block" *ngIf="page===1" ><<</div>
   <div id="page">{{page}}</div>
-  <div class="changePage" (click)="switchPage('+')">>></div>
+  <div class="changePage" (click)="switchPage('+')" *ngIf="page!==totalPage">>></div>
+  <div class="block" *ngIf="page===totalPage" ><<</div>
 </div>
 </div>

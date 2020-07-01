@@ -2,7 +2,5 @@
   <ng-container *ngFor="let id of articleArray">
     <app-article [articleDataID]="id"></app-article>
   </ng-container>
-
-
-  <app-footer (changePage)="changePage($event)" [page]="page"></app-footer>
+  <app-footer (changePage)="changePage($event)" [page]="page" [totalPage]="totalPage"></app-footer>
 </div>

@@ -3,6 +3,7 @@
 }
 
 #sidebar{
+    top:0px;
     position: fixed;
     width: 350px;
     height: 100%;
@@ -45,4 +46,11 @@ h3{
     border-top: solid 110px rgba(30, 143, 30, 0.548);
     border-left: solid 350px transparent;
     /* background-color: rgba(30, 143, 30, 0.548); */
+}
+
+#routeUrl{
+    top:100px;
+    z-index: 10;
+    position: relative;
+    color: rgb(117, 102, 65);
 }
