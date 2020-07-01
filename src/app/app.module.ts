@@ -12,6 +12,7 @@ import { ArticleTagComponent } from './article-tag/article-tag.component';
 import { HttpClientModule } from '@angular/common/http';
 import {ApiService} from './api/api.service';
 import { IntroduceComponent } from './introduce/introduce.component';
+import { ArticlePageComponent } from './article-page/article-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { IntroduceComponent } from './introduce/introduce.component';
     FooterComponent,
     ArticleComponent,
     ArticleTagComponent,
-    IntroduceComponent
+    IntroduceComponent,
+    ArticlePageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+*{
+    border:1px solid red;
+    
+}
+
+.articlePage{
+    margin-left:400px;
+    margin-right: 300px;
+    min-width: 500px;
+    height: 100%;
+    padding-top: 50px;
+    margin-top: 100px;
+}

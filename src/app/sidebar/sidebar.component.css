@@ -51,6 +51,10 @@ h3{
 #routeUrl{
     top:100px;
     z-index: 10;
-    position: relative;
-    color: rgb(117, 102, 65);
+    position: relative;    
+}
+
+a{
+    color: rgb(53, 47, 36);
+    text-decoration: none;
 }

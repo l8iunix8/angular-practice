@@ -1,15 +1,16 @@
 <div class="article">
   <h1 class="articleTitle">
-      {{data['title']}}
+      <a [routerLink]="['/articlePage',data['id']]">{{data['title']}}</a>
   </h1>
   <div class="spaceLine"></div>
   <div class="articleContent">
       <div class="articleDate">
-        2020/06/13
+        {{data['date']}}
       </div>
       <p class="articleText">
-        {{data['content']}}      </p>
-      <p class="keepReading">(繼續閱讀)</p>
+        <a [routerLink]="['/articlePage',data['id']]">{{data['content']}}</a>
+              </p>
+      <p class="keepReading"> <a [routerLink]="['/articlePage',data['id']]">(繼續閱讀)</a> </p>
     <p class="articleTag">
       <app-article-tag></app-article-tag>
       <app-article-tag></app-article-tag>
