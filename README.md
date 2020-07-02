@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## 使用說明
+要先去beckend資料夾內下指令 
+node server.js 開啟伺服器
+之後即可在瀏覽器 網址欄輸入 127.0.0.1:4999進入該網頁
+現在尚在修改
