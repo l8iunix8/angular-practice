@@ -1,7 +1,10 @@
 const express = require("express");
 const article = require("./public/articleData.json")
+const path = require('path')
 const app = express();
 
+
+app.use(express.static(__dirname + '/dist/practice'));
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -15,8 +18,10 @@ app.use((req, res, next) => {
   });
 });
 
-app.get("/", (req, res) => {
-  res.send('HelloWorld');
+app.get("/*", (req, res) => {
+  console.log(__dirname)
+  console.log(path)
+  res.sendFile(path.join(__dirname));
 });
 
 app.get("/api/totalDataCount",(req,res)=>{
