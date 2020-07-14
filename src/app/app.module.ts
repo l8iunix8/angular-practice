@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {ApiService} from './api/api.service';
 import { IntroduceComponent } from './introduce/introduce.component';
 import { ArticlePageComponent } from './article-page/article-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommmentComponent } from './commment/commment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,10 +25,12 @@ import { ArticlePageComponent } from './article-page/article-page.component';
     ArticleComponent,
     ArticleTagComponent,
     IntroduceComponent,
-    ArticlePageComponent
+    ArticlePageComponent,
+    CommmentComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule
   ],

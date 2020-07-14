@@ -19,8 +19,6 @@ app.use((req, res, next) => {
 });
 
 app.get("/*", (req, res) => {
-  console.log(__dirname)
-  console.log(path)
   res.sendFile(path.join(__dirname));
 });
 

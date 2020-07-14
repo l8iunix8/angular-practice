@@ -1,21 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ApiService } from '../api/api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
 })
-export class ArticleComponent implements OnInit {
-  constructor(private service: ApiService) {}
-  
+export class ArticleComponent implements OnInit, OnDestroy {
+  constructor(private service: ApiService) { }
+
+  getArticleDataByIdSubscription$ = new Subscription();
+
   @Input() articleDataID: string;
   data = {};
 
   ngOnInit(): void {
-    this.service.getArticleDataById(this.articleDataID).subscribe((data) => {
+    this.getArticleDataByIdSubscription$ = this.service.getArticleDataById(this.articleDataID).subscribe((data) => {
       this.data = data;
-      console.log('this.data',this.data)
     });
+  }
+  ngOnDestroy(): void {
+    this.getArticleDataByIdSubscription$.unsubscribe();
   }
 }

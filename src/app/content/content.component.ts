@@ -1,14 +1,18 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../api/api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css'],
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit ,OnDestroy{
   constructor(private service: ApiService) { }
+
+  getTotalDataCountSubscription$ = new Subscription();
+  
   // 第幾頁
   page = 1;
   // 一頁幾筆資料
@@ -21,13 +25,17 @@ export class ContentComponent implements OnInit {
   totalDataCount;
 
   ngOnInit(): void {
-    this.service.getTotalDataCount().subscribe((data: any) => {
+    this.getTotalDataCountSubscription$ = this.service.getTotalDataCount().subscribe((data: any) => {
       this.totalDataCount = Number(data);
       this.totalPage = Math.ceil(data / this.articleCount);
       for (let i = 0; i < this.articleCount; i++) {
         this.articleArray.push(i);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.getTotalDataCountSubscription$.unsubscribe();
   }
 
   changePage(status) {
