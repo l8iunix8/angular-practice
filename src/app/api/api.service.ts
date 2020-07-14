@@ -15,4 +15,8 @@ export class ApiService {
   getTotalDataCount() {
     return this.http.get(this.url + 'api/totalDataCount', { responseType: 'text' });
   }
+
+  getCommentByArticleId(id) {
+    return this.http.get(this.url + 'api/comment/' + id, { responseType: 'json' });
+  }
 }

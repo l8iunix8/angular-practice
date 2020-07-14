@@ -14,7 +14,7 @@ import {ApiService} from './api/api.service';
 import { IntroduceComponent } from './introduce/introduce.component';
 import { ArticlePageComponent } from './article-page/article-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommmentComponent } from './commment/commment.component';
+import { CommentComponent } from './comment/comment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,7 @@ import { CommmentComponent } from './commment/commment.component';
     ArticleTagComponent,
     IntroduceComponent,
     ArticlePageComponent,
-    CommmentComponent
+    CommentComponent
   ],
   imports: [
     BrowserModule,

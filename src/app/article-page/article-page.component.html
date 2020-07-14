@@ -4,6 +4,10 @@
         <div id="articlePageContent">{{data['content']}}</div>
         <div id="articlePageComment">
             評論區
+            <ng-container *ngFor="let commentData of commentArray">
+                <app-comment [commentData]="commentData"></app-comment>
+            </ng-container>
+            
         </div>
         <div id="leavaMessage">
             留言區

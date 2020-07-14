@@ -1,6 +1,8 @@
 const express = require("express");
 const article = require("./public/articleData.json")
-const path = require('path')
+const comment = require("./public/comment.json")
+const path = require('path');
+const { isArrayTypeNode } = require("typescript");
 const app = express();
 
 
@@ -30,6 +32,16 @@ app.get("/api/:id", (req, res) => {
   res.send(article[req.params.id])
 });
 
+app.get("/api/comment/:id", (req, res) => {
+  const array = [];
+  const articleId = Number(req.params.id);
+  comment.forEach(element=>{
+    if(element['articleId']===articleId){
+      array.push(element);
+    }
+  });
+  res.send(array)
+});
 
 app.listen(4999, () => {
   console.log("listening port 4999");
