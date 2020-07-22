@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ArticleComment } from 'src/app/type/comment.type';
 @Injectable({
   providedIn: 'root',
 })
@@ -8,15 +9,24 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getArticleDataById(id) {
-    return this.http.get(this.url + 'api/' + id, { responseType: 'json' });
+  getArticleDataById(articleId) {
+    return this.http.get(this.url + 'api/' + articleId, { responseType: 'json' });
   }
 
   getTotalDataCount() {
     return this.http.get(this.url + 'api/totalDataCount', { responseType: 'text' });
   }
 
-  getCommentByArticleId(id) {
-    return this.http.get(this.url + 'api/comment/' + id, { responseType: 'json' });
+  getCommentByArticleId(articleId) {
+    return this.http.get(this.url + 'api/comment/' + articleId, { responseType: 'json' });
+  }
+
+  postCommentByArticleId(comment: ArticleComment) {
+    console.log('postCommentByArticleId', comment);
+    return this.http.post(this.url + 'api/comment', comment, {
+      headers: {
+        'Content-Type': 'application/json'
+      }, responseType: 'text'
+    });
   }
 }

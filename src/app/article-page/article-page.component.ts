@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api/api.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ArticleComment } from 'src/app/type/comment.type';
+import { ArticleComponent } from '../article/article.component';
 
 @Component({
   selector: 'app-article-page',
@@ -18,10 +20,11 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
   data;
   id;
   commentArray = [];
+  comment: ArticleComment;
   messageForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
-    message: ['', Validators.required]
+    comment: ['', Validators.required]
   });
 
   ngOnInit(): void {
@@ -37,12 +40,30 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.getArticleDataByIdSubscription$.unsubscribe();
   }
+
+  /*
+   * 送出表單
+   */
+
   onSubmit() {
     if (this.messageForm.valid) {
-      this.messageForm.reset();
+      this.sendComment(this.messageForm.value).subscribe(result => {
+        this.messageForm.reset();
+      });
     } else {
-      alert("請填寫全部內容")
+      alert('請填寫全部內容');
     }
+  }
+
+  /*
+   * 送出留言訊息
+   */
+  sendComment(comment: ArticleComment): Observable<any> {
+    const sendComment = {
+      ...{ articleId: this.id },
+      ...comment
+    } as ArticleComment;
+    return this.service.postCommentByArticleId(sendComment);
   }
 
 }
