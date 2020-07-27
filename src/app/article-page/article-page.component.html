@@ -1,23 +1,31 @@
 <div class="articlePage">
 
-        <div id="articlePageTitle">{{data['title']}}</div>
-        <div id="articlePageContent">{{data['content']}}</div>
-        <div id="articlePageComment">
-            評論區
-            <ng-container *ngFor="let commentData of commentArray">
-                <app-comment [commentData]="commentData"></app-comment>
-            </ng-container>
-            
-        </div>
-        <div id="leavaMessage">
-            留言區
-            <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" id="messageForm" >
-                <br>
-                名稱:<input type="text" class="message messageName"  formControlName="name">
-                E-mail<input type="text" class="message"  formControlName="email">
-                內容:<textarea class="message" cols="30" rows="10" formControlName="comment"></textarea>
-                <button type="submit">送出</button>
-            </form>
-        </div>
+    <div id="articlePageTitle">{{data['title']}}</div>
+    <div id="articlePageContent">{{data['content']}}</div>
+    <div id="articlePageComment">
+        評論區
+        <ng-container *ngFor="let commentData of commentArray">
+            <app-comment [commentData]="commentData"></app-comment>
+        </ng-container>
+
+    </div>
+    <div id="leavaMessage">
+        留言區
+        <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" id="messageForm">
+            <br>
+            <div><span class="formTitle">名稱 :</span>
+                <input type="text" class="message messageName" formControlName="name">
+                <span class="errorMessage" *ngIf="messageForm.get('name').invalid">{{errorMessage['nameError']}}</span>
+            </div>
+            <div> <span class="formTitle">E-mail :</span>
+                <input type="text" class="message" formControlName="email">
+                <span class="errorMessage" *ngIf="messageForm.get('email').invalid">{{errorMessage['emailError']}}</span></div>
+            <div> <span class="formTitle">內容 :</span>
+                <textarea class="message" cols="30" rows="10" formControlName="comment"></textarea>
+                <span class="errorMessage" *ngIf="messageForm.get('comment').invalid">{{errorMessage['commentError']}}</span></div>
+
+            <button type="submit">送出</button>
+        </form>
+    </div>
 
 </div>

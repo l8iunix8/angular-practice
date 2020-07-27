@@ -54,7 +54,6 @@ export class ContentComponent implements OnInit ,OnDestroy{
 
       case '-':
         this.page = this.page === 1 ? this.page : (this.page - 1);
-        console.log(this.page);
         for (let i = 0; i < this.articleCount; i++) {
           this.articleArray.push((this.page - 1) * this.articleCount + i);
         }

@@ -1,6 +1,6 @@
 <div class="article">
   <h1 class="articleTitle">
-      <a [routerLink]="['/articlePage',data['id']]">{{data['title']}}</a>
+      <a [routerLink]="['/articlePage',data['id']]" (click)="pageToTop()">{{data['title']}}</a>
   </h1>
   <div class="spaceLine"></div>
   <div class="articleContent">
@@ -8,9 +8,9 @@
         {{data['date']}}
       </div>
       <p class="articleText">
-        <a [routerLink]="['/articlePage',data['id']]">{{data['content']}}</a>
+        <a [routerLink]="['/articlePage',data['id']]" (click)="pageToTop()">{{data['content']}}</a>
               </p>
-      <p class="keepReading"> <a [routerLink]="['/articlePage',data['id']]">(繼續閱讀)</a> </p>
+      <p class="keepReading"> <a [routerLink]="['/articlePage',data['id']]" (click)="pageToTop()">(繼續閱讀)</a> </p>
     <p class="articleTag">
       <app-article-tag></app-article-tag>
       <app-article-tag></app-article-tag>

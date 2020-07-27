@@ -23,4 +23,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.getArticleDataByIdSubscription$.unsubscribe();
   }
+
+  pageToTop() {
+    window.scrollTo(0, 0);
+  }
 }
