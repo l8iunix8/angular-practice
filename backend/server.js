@@ -5,6 +5,8 @@ const path = require("path");
 const allFunction = require("./function/function.js");
 const bodyParser = require('body-parser');
 const app = express();
+const fs = require("fs");
+
 
 app.use(express.static(__dirname + "/dist/practice"));
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -29,22 +31,32 @@ app.get("/*", (req, res) => {
 });
 
 app.get("/api/totalDataCount", (req, res) => {
-  res.send(String(article.length));
+  fs.readFile(`./public/articleData.json`, function (err, data) {
+    const fileData = JSON.parse(data.toString());
+    res.send(String(fileData.length));
+  });
 });
 
 app.get("/api/:id", (req, res) => {
-  res.send(article[req.params.id]);
+  const id = Number(req.params.id);
+  fs.readFile(`./public/articleData.json`, function (err, data) {
+    const fileData = JSON.parse(data.toString());
+    res.send(fileData[id]);
+  });
 });
 
 app.get("/api/comment/:id", (req, res) => {
   const array = [];
   const articleId = Number(req.params.id);
-  comment.forEach((element) => {
-    if (element["articleId"] === articleId) {
-      array.push(element);
-    }
-  });
-  res.send(array);
+    fs.readFile(`./public/comment.json`, function (err, data) {
+      const fileData = JSON.parse(data.toString());
+      fileData.forEach((element) => {
+        if (element["articleId"] === articleId) {
+          array.push(element);
+        }
+      });
+      res.send(array);
+    });
 });
 
 app.post("/api/comment", (req, res) => {
@@ -59,7 +71,7 @@ app.post("/api/comment", (req, res) => {
   const sendComment = req.body;
   sendComment['id'] =  comment.length+1;
   allFunction.writeCommentJSON(req.body);
-  res.send("true");
+  res.send(req.body);
 });
 
 app.listen(4999, () => {

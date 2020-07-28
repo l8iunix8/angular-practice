@@ -52,14 +52,25 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
    */
 
   onSubmit() {
+    Object.keys(this.errorMessage).forEach(element => {
+      this.errorMessage[element] = '';
+    });
     if (this.messageForm.valid) {
       this.sendComment(this.messageForm.value).subscribe(result => {
-
+        const data = JSON.parse(result);
+        this.commentArray.push(data);
         this.messageForm.reset();
         window.scrollTo(0, 0);
       });
     } else {
-      this.checkErrorMessage();
+      const obj = Object.keys(this.messageForm.controls);
+      const array = [];
+      obj.forEach(element => {
+        if (this.messageForm.controls[element].value === '') {
+          array.push(element);
+        }
+      });
+      this.checkErrorMessage(array);
     }
   }
 
@@ -68,26 +79,41 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
    */
   sendComment(comment: ArticleComment): Observable<any> {
     const sendComment = {
-      ...{ articleId: this.id },
+      ...{ articleId: Number(this.id) },
       ...comment
     } as ArticleComment;
     return this.service.postCommentByArticleId(sendComment);
   }
 
-  checkErrorMessage() {
-    console.log('checkErrorMessage');
-    if (!this.messageForm.controls.name.valid) {
+  checkErrorMessage(array?: string[]) {
+    if (array.length > 0) {
+      array.forEach(element => {
+        switch (element) {
+          case 'name':
+            this.setErrorMessage('nameError', '每個欄位皆為必填');
+            break;
+          case 'email':
+            this.setErrorMessage('emailError', '每個欄位皆為必填');
+            break;
+          case 'comment':
+            this.setErrorMessage('commentError', '每個欄位皆為必填');
+            break;
+        }
+      });
+    }
+    if (!this.messageForm.controls.name.valid && !this.errorMessage.nameError) {
       this.setErrorMessage('nameError', '姓名格式錯誤');
-    } else if (!this.messageForm.controls.email.valid) {
+    }
+    if (!this.messageForm.controls.email.valid && !this.errorMessage.emailError) {
       this.setErrorMessage('emailError', 'MAIL格式錯誤');
-    } else if (!this.messageForm.controls.comment.valid) {
+    }
+    if (!this.messageForm.controls.comment.valid && !this.errorMessage.commentError) {
       this.setErrorMessage('commentError', '留言格式錯誤');
     }
   }
 
   setErrorMessage(id: string, msg: string) {
-    // tslint:disable-next-line: no-string-literal
-    this.errorMessage['id'] = msg;
+    this.errorMessage[id] = msg;
   }
 
 }

@@ -59,6 +59,8 @@
 
 .errorMessage {
   width: 200px;
+  margin-left: 10px;
+  color:#e33;
 }
 
 button {

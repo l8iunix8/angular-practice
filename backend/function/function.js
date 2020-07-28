@@ -6,7 +6,7 @@ module.exports = {
       if (err) {
         return console.error(err);
       }
-      
+
       //將二進制數據轉換為字串符
       var user = userInfo.toString();
       user = JSON.parse(user);
@@ -24,5 +24,5 @@ module.exports = {
         console.log("Add new user to userInfo...");
       });
     });
-  },
+  }
 };
