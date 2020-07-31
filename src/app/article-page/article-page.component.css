@@ -24,7 +24,8 @@
 
 #articlePageComment {
   min-height: 200px;
-  padding-left: 40px;
+
+  padding:0px  40px;
   padding-top: 20px;
 }
 

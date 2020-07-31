@@ -1,0 +1,23 @@
+.comment {
+  margin-top: 10px;
+  border: 1px solid #888;
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment .name {
+  color: rgb(42, 42, 206);
+  font-size: 18px;
+  padding:5px;
+}
+
+.comment .commentContent {
+    min-height: 50px;
+   background-color: #888;
+   border-radius: 5px;
+  font-size: 16px;
+  padding:5px;
+  margin: 10px;
+}

@@ -19,13 +19,14 @@
             </div>
             <div> <span class="formTitle">E-mail :</span>
                 <input type="text" class="message" formControlName="email">
-                <span class="errorMessage" *ngIf="messageForm.get('email').invalid">{{errorMessage['emailError']}}</span></div>
+                <span class="errorMessage"
+                    *ngIf="messageForm.get('email').invalid">{{errorMessage['emailError']}}</span></div>
             <div> <span class="formTitle">內容 :</span>
                 <textarea class="message" cols="30" rows="10" formControlName="comment"></textarea>
-                <span class="errorMessage" *ngIf="messageForm.get('comment').invalid">{{errorMessage['commentError']}}</span></div>
+                <span class="errorMessage"
+                    *ngIf="messageForm.get('comment').invalid">{{errorMessage['commentError']}}</span></div>
 
             <button type="submit">送出</button>
         </form>
     </div>
-
 </div>
