@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../api/api.service';
+import { ApiService } from '../service/api/api.service';
 import { Subscription, Observable } from 'rxjs';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ArticleComment } from 'src/app/type/comment.type';
 import { ArticleComponent } from '../article/article.component';
-
 @Component({
   selector: 'app-article-page',
   templateUrl: './article-page.component.html',
@@ -31,10 +30,13 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
     comment: ['', Validators.required]
   });
 
+  auth2;
+
   constructor(private route: ActivatedRoute, private service: ApiService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    console.log(this.id)
     this.getArticleDataByIdSubscription$ = this.service.getArticleDataById(this.id - 1).subscribe((data) => {
       this.data = data;
     });
@@ -115,5 +117,7 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
   setErrorMessage(id: string, msg: string) {
     this.errorMessage[id] = msg;
   }
+
+
 
 }

@@ -1,60 +1,133 @@
-*{
-    border:1px solid red;
+* {
+  border: 1px solid red;
 }
 
-#sidebar{
-    top:0px;
-    position: fixed;
-    width: 350px;
-    height: 100%;
-    min-width: 150px;
+#sidebar {
+  top: 0px;
+  position: fixed;
+  width: 350px;
+  height: 100%;
+  min-width: 150px;
 }
 
-#sidebarbackground{
-    position: fixed;
-    z-index: 1;
-    width:0px;
-    height: 100%;
-    border-top: solid 850px gray;
-    border-right: solid 350px transparent;
+#sidebarbackground {
+  position: fixed;
+  z-index: 1;
+  width: 0px;
+  height: 100%;
+  border-top: solid 850px gray;
+  border-right: solid 350px transparent;
 }
 
-#sidebarTitle{
-    z-index: 5;
-    position: relative;
-    top:200px;
-    height:300px;
+#sidebarTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
 }
 
-h1 {
-   text-align: center;
-    color:rgb(209, 194, 164);
+#sidebarTitle h3 {
+  padding-left: 100px;
 }
 
-h3{
-    padding-left: 130px;
-    color:rgb(53, 47, 36);
-    z-index: 10;
- }
-
-#colorboard{
-    margin-left: 30px;
-    position: absolute;
-    top:120px;
-    /* width:350px;
-    height:100px; */
-    border-top: solid 110px rgba(30, 143, 30, 0.548);
-    border-left: solid 350px transparent;
-    /* background-color: rgba(30, 143, 30, 0.548); */
+#colorboard {
+  margin-left: 30px;
+  border-top: solid 110px rgba(30, 143, 30, 0.548);
+  border-left: solid 350px transparent;
 }
 
-#routeUrl{
-    top:100px;
-    z-index: 10;
-    position: relative;    
+#sidebarContent {
+  position: relative;
+  top: 160px;
+  z-index: 5;
 }
 
-a{
-    color: rgb(53, 47, 36);
-    text-decoration: none;
+#routeUrl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#routeUrl h3 {
+  margin-top: 5px;
+}
+
+#routeUrl a {
+  cursor: pointer;
+}
+
+a {
+  color: rgb(53, 47, 36);
+  text-decoration: none;
+}
+#mask {
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.664);
+}
+
+#loginBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 400px;
+  height: 300px;
+  background-color: blanchedalmond;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.closeIcon {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+.closeIcon img {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+}
+
+.btn {
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: none;
+  border-radius: 3px;
+  position: relative;
+  padding: 12px 30px;
+  margin: 10px 1px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  outline: 0;
+  font-size: 14px;
+  font-weight: 400;
+  will-change: box-shadow, transform;
+}
+
+.btn.btn-google:active,
+.btn.btn-google:focus,
+.btn.btn-google:hover {
+  box-shadow: 0 14px 26px -12px rgba(221, 75, 57, 0.42),
+    0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(221, 75, 57, 0.2);
+}
+.btn.btn-google {
+  background-color: #dd4b39;
+  color: #fff;
+}
+
+.zmdi-google-plus {
+  content: url("https://api.iconify.design/zmdi-google-plus.svg?height=16&inline=true");
+  background: url("https://api.iconify.design/zmdi-google-plus.svg") no-repeat
+    center center / contain;
 }

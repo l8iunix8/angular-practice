@@ -1,12 +1,31 @@
 <div id="sidebar">
+
     <div id="sidebarbackground"></div>
-    <div id="sidebarTitle">
-        <h1>{{sidebarString.sidebarTitleH1}}</h1><br><br>
-        <h3>{{sidebarString.sidebarTitleH3}}</h3>
-        <div id="colorboard"></div>
+    <div id="sidebarContent">
+        <div id="sidebarTitle">
+            <h1>{{sidebarString.sidebarTitleH1}}</h1><br><br>
+            <h3>{{sidebarString.sidebarTitleH3}}</h3>
+            <br>
+            <div id="colorboard"></div>
+        </div>
+        <div id="routeUrl">
+            <h3><a routerLink="/">{{sidebarString.allArticle}}</a></h3>
+            <h3><a routerLink="/introduce">{{sidebarString.introduce}}</a></h3>
+            <h3 *ngIf="showLoginButton"><a (click)="openMask()" >{{sidebarString.login}}</a></h3>
+            <h3 *ngIf="!showLoginButton"><a (click)="clickLogout()" >{{sidebarString.logout}}</a></h3>
+        </div>
     </div>
-    <div id="routeUrl">
-        <h3><a routerLink="/">{{sidebarString.allArticle}}</a></h3>
-        <h3><a routerLink="/introduce">{{sidebarString.introduce}}</a></h3>
+
+    <!-- 遮罩 -->
+    <div id="mask" *ngIf="showMask">
+        <div id="loginBlock">
+            <div class="closeIcon" (click)="closeMask()">
+                <img src="../assets/close.png">
+            </div>
+            <button #login class="btn btn-google btn-block" (click)="googleLogin()">
+                <span class="iconify" data-icon="zmdi-google-plus" data-inline="false"></span>
+                Sign Up with Google
+            </button>
+        </div>
     </div>
 </div>

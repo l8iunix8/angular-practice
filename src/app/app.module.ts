@@ -10,11 +10,12 @@ import { FooterComponent } from './footer/footer.component';
 import { ArticleComponent } from './article/article.component';
 import { ArticleTagComponent } from './article-tag/article-tag.component';
 import { HttpClientModule } from '@angular/common/http';
-import {ApiService} from './api/api.service';
+import {ApiService} from './service/api/api.service';
 import { IntroduceComponent } from './introduce/introduce.component';
 import { ArticlePageComponent } from './article-page/article-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommentComponent } from './comment/comment.component';
+import { LogStatusService } from './service/log-status/log-status.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,7 @@ import { CommentComponent } from './comment/comment.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ApiService],
+  providers: [ApiService,LogStatusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

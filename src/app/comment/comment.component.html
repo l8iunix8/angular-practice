@@ -1,5 +1,11 @@
 <div class="comment">
-    <p class="name">{{commentData.name}}</p>
-    <div class="commentContent">{{commentData.comment}}</div>
+    
+    <div class="commentContent">
+        <p class="name">{{commentData['name']}}:</p>
+        <p class="userComment">{{commentData['comment']}}</p></div>
+    <div class="commentResponse" *ngIf="commentResponse['response']">
+        <p class="name">回覆:</p>
+        <p class="userComment">{{commentResponse['response']}}</p>
+    </div>
 
 </div> 

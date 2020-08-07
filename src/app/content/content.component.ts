@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiService } from '../api/api.service';
+import { ApiService } from '../service/api/api.service';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ApiService } from '../api/api.service';
+import { ApiService } from '../service/api/api.service';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,7 +1,10 @@
+
+
 .comment {
+  display: flex;
+  justify-content: space-around;
   margin-top: 10px;
   border: 1px solid #888;
-  width: 100%;
   min-height: 100px;
   display: flex;
   flex-direction: column;
@@ -10,14 +13,30 @@
 .comment .name {
   color: rgb(42, 42, 206);
   font-size: 18px;
-  padding:5px;
+  padding: 5px;
 }
 
 .comment .commentContent {
-    min-height: 50px;
-   background-color: #888;
-   border-radius: 5px;
+  min-height: 50px;
+  width: 60%;
+  background-color: #ccc;
+  border-radius: 5px;
   font-size: 16px;
-  padding:5px;
+  padding: 10px;
   margin: 10px;
+}
+
+.commentResponse {
+  align-self:flex-end;
+  min-height: 50px;
+  width: 60%;
+  background-color: #888;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.userComment{
+  padding:5px 10px;
 }
