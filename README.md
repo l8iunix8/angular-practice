@@ -6,10 +6,14 @@
 - 現在尚在修改
 
 ## 問題
- sidebar裡面的按鈕問題
- 我的按鈕 分別是登入跟登出 綁定在showLoginButton屬性
- 另外遮罩綁定showMask屬性
- 遮罩上是google登入的按鈕
+- sidebar裡面的按鈕問題
+- 我的按鈕 分別是登入跟登出 綁定在showLoginButton屬性
+- 另外遮罩綁定showMask屬性
+- 遮罩上是google登入的按鈕
+
+- Angular 跟 node都是自己摸的 不是很好看 請見諒
+- 因為懶得連接資料庫 所以這樣子寫.....
+- 如果有任何建議 歡迎提出指教 謝謝
 
 
 
