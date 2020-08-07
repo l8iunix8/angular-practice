@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { from, Observable, Subscription } from 'rxjs';
 import { ApiService } from '../api/api.service';
+import { tap } from 'rxjs/operators';
 declare const gapi: any;
 
 @Injectable({
@@ -59,21 +60,31 @@ export class LogStatusService {
   }
 
   onSignIn(element?) {
-    const obs = from(this.auth2.signIn());
-    return new Observable(subscriber => {
-      obs.subscribe((googleUser: any) => {
-        const token = googleUser.getAuthResponse().id_token;
-        localStorage.setItem(this.TOKEN, token);
-        console.log('Token || ' + googleUser.getAuthResponse().id_token);
-        const profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId());
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
-        subscriber.next();
-        subscriber.complete();
-      });
-    });
+    return from(this.auth2.signIn()).pipe(tap((googleUser: any) => {
+      const token = googleUser.getAuthResponse().id_token;
+      localStorage.setItem(this.TOKEN, token);
+      console.log('Token || ' + googleUser.getAuthResponse().id_token);
+      const profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId());
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+    }));
+    // const obs = from(this.auth2.signIn());
+    // return new Observable(subscriber => {
+    //   obs.subscribe((googleUser: any) => {
+    //     const token = googleUser.getAuthResponse().id_token;
+    //     localStorage.setItem(this.TOKEN, token);
+    //     console.log('Token || ' + googleUser.getAuthResponse().id_token);
+    //     const profile = googleUser.getBasicProfile();
+    //     console.log('ID: ' + profile.getId());
+    //     console.log('Name: ' + profile.getName());
+    //     console.log('Image URL: ' + profile.getImageUrl());
+    //     console.log('Email: ' + profile.getEmail());
+    //     subscriber.next();
+    //     subscriber.complete();
+    //   });
+    // });
 
 
     //另一種寫法

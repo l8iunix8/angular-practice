@@ -46,6 +46,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   // 登出
   clickLogout() {
+    this.logStatus.onLogout();
     this.showLoginButton = false;
   }
 
