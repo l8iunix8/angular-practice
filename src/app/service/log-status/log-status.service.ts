@@ -1,14 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { from, Observable, Subscription } from 'rxjs';
 import { ApiService } from '../api/api.service';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 declare const gapi: any;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LogStatusService {
-
   private _LOGINSTATUS = '';
 
   TOKEN = 'accessToken';
@@ -31,11 +30,11 @@ export class LogStatusService {
       next: (result) => {
         this.userProfile = result;
       },
-      complete: () => { },
+      complete: () => {},
       error: (error) => {
         console.log(error);
         localStorage.clear();
-      }
+      },
     });
   }
 
@@ -52,27 +51,19 @@ export class LogStatusService {
   googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
-        client_id: '才不給你看咧.apps.googleusercontent.com',
+        client_id: 'ABCD.apps.googleusercontent.com',
         cookie_policy: 'single_host_origin',
-        scope: 'profile email'
+        scope: 'profile email',
       });
     });
   }
 
-  onSignIn(element?) {
-    return from(this.auth2.signIn()).pipe(tap((googleUser: any) => {
-      const token = googleUser.getAuthResponse().id_token;
-      localStorage.setItem(this.TOKEN, token);
-      console.log('Token || ' + googleUser.getAuthResponse().id_token);
-      const profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId());
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail());
-    }));
-    // const obs = from(this.auth2.signIn());
-    // return new Observable(subscriber => {
-    //   obs.subscribe((googleUser: any) => {
+  onSignIn(element?): Observable<any> {
+    return from(this.auth2.signIn()).pipe(
+      map((googleUser: any) => googleUser.getAuthResponse().id_token)
+    );
+    // return from(this.auth2.signIn()).pipe(
+    //   tap((googleUser: any) => {
     //     const token = googleUser.getAuthResponse().id_token;
     //     localStorage.setItem(this.TOKEN, token);
     //     console.log('Token || ' + googleUser.getAuthResponse().id_token);
@@ -81,13 +72,10 @@ export class LogStatusService {
     //     console.log('Name: ' + profile.getName());
     //     console.log('Image URL: ' + profile.getImageUrl());
     //     console.log('Email: ' + profile.getEmail());
-    //     subscriber.next();
-    //     subscriber.complete();
-    //   });
-    // });
+    //   })
+    // );
 
-
-    //另一種寫法
+    // 另一種寫法
     // this.auth2.attachClickHandler(element /*傳進來的HTML元素*/ */, {},
     //   (googleUser) => {
     //     const profile = googleUser.getBasicProfile();
@@ -109,5 +97,4 @@ export class LogStatusService {
   onLogout() {
     localStorage.clear();
   }
-
 }

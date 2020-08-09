@@ -12,8 +12,9 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
+  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
   next();
   app.options("*", (req, res) => {
     res.header(
@@ -97,13 +98,12 @@ app.post("/api/getProfile", (req, res) => {
   allFunction
     .getGoogleProfile(accessToken)
     .then(function (profile) {
-      console.log('profile',profile)
       if (!profile.name || !profile.email) {
         res.status(400).send({
           error: "Permissions Error: name, email are required.",
         });
         return;
-      }      
+      }
       res.send({
         user: {
           name: profile.name,

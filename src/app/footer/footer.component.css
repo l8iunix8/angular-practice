@@ -1,33 +1,31 @@
-*{
-  border:1px solid red;
-}
-#footer{
+/* * {
+  border: 1px solid red;
+} */
+#footer {
   height: 50px;
-  margin-left:400px;
-  margin-right: 300px;
 }
 
-#page{
-  margin:10px auto;
-  width:20px;
+#page {
+  margin: 10px auto;
+  width: 20px;
   text-align: center;
   display: inline-block;
 }
 
-.changePage{
-  width:20px;
+.changePage {
+  width: 20px;
   text-align: center;
   display: inline-block;
 }
 
-.block{
-  width:20px;
+.block {
+  width: 20px;
   text-align: center;
   display: inline-block;
   visibility: hidden;
 }
 
-#square{
-  margin:1px auto;
-  width:70px;
+#square {
+  margin: 1px auto;
+  width: 70px;
 }
