@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import {
   Component,
   OnInit,
@@ -20,10 +20,7 @@ import { LogStatusService } from '../service/log-status/log-status.service';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
-  showArray = {
-    showMask: false,
-    showLoginButton: false,
-  };
+  isLoggedIn: Observable<any>;
   sidebarString = SidebarString;
   showMask = false;
   showLoginButton = true;
@@ -31,32 +28,38 @@ export class SidebarComponent implements OnInit {
   constructor(
     private logStatus: LogStatusService,
     private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) {
+    this.isLoggedIn = this.logStatus.logStatus as Observable<any>;
+  }
 
   ngOnInit(): void {
     // 先判斷localstorage是否有資料
-    this.showArray.showLoginButton = this.logStatus.loadLocalStorage();
+    this.isLoggedIn.subscribe((boo) => {
+      console.log('boo', boo);
+      this.showLoginButton = !boo;
+    });
   }
 
   // 遮罩顯示
   openMask() {
-    this.showArray.showMask = true;
+    this.showMask = true;
   }
 
   // 遮罩關閉
   closeMask() {
-    this.showArray.showMask = false;
+    this.showMask = false;
   }
 
   // 按下GOOGLE登入鈕
   googleLogin() {
     this.logStatus.onSignIn().subscribe(
-      (token: string) => {
-        localStorage.setItem('token', token);
-        this.showArray.showMask = false;
-        this.showArray.showLoginButton = false;
+      () => {
+        this.showMask = false;
+        // this.showLoginButton = false;
+        this.logStatus.setLogStatus(true);
       },
       (error) => {
+        this.logStatus.setLogStatus(false);
         console.error(JSON.stringify(error));
       }
     );
@@ -65,6 +68,5 @@ export class SidebarComponent implements OnInit {
   // 登出
   clickLogout() {
     this.logStatus.onLogout();
-    this.showArray.showLoginButton = true;
   }
 }

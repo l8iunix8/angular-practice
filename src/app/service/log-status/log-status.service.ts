@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { from, Observable, Subscription } from 'rxjs';
+import { from, Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { tap, map } from 'rxjs/operators';
 declare const gapi: any;
@@ -8,19 +8,15 @@ declare const gapi: any;
   providedIn: 'root',
 })
 export class LogStatusService {
-  private _LOGINSTATUS = '';
+  private _loginStatus = new BehaviorSubject<boolean>(this.loadLocalStorage());
 
   TOKEN = 'accessToken';
   auth2;
   userProfile = {};
   getProfileSubscription$ = new Subscription();
 
-  get logStatus(): string {
-    return this._LOGINSTATUS;
-  }
-
-  set logStatus(status: string) {
-    this._LOGINSTATUS = status;
+  get logStatus() {
+    return this._loginStatus;
   }
 
   constructor(private service: ApiService) {
@@ -39,20 +35,22 @@ export class LogStatusService {
   }
 
   // 判斷localStorage裡面是否存在token (token是否可用 另外再說)
-  // 如果有token則回傳false表示不用顯示登入鈕
+  // 如果有token則回傳true表示不用顯示登入鈕
   loadLocalStorage() {
-    const token = localStorage.getItem(this.TOKEN);
-    if (token) {
-      return false;
-    }
-    return true;
+    return !!localStorage.getItem(this.TOKEN);
+  }
+
+  //設定有無資料
+  setLogStatus(boo: boolean) {
+    this._loginStatus.next(boo);
   }
 
   googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
-        client_id: 'ABCD.apps.googleusercontent.com',
-        cookie_policy: 'single_host_origin',
+        client_id:
+          '548588976225-9vn6rb0sv6u2p1d7fk19rr57r9mh4lmu.apps.googleusercontent.com',
+        cookie_policy: 'none',
         scope: 'profile email',
       });
     });
@@ -60,7 +58,11 @@ export class LogStatusService {
 
   onSignIn(element?): Observable<any> {
     return from(this.auth2.signIn()).pipe(
-      map((googleUser: any) => googleUser.getAuthResponse().id_token)
+      map((googleUser: any) => {
+        const token = googleUser.getAuthResponse().id_token;
+        localStorage.setItem(this.TOKEN, token);
+        console.log(token);
+      })
     );
     // return from(this.auth2.signIn()).pipe(
     //   tap((googleUser: any) => {
@@ -76,7 +78,7 @@ export class LogStatusService {
     // );
 
     // 另一種寫法
-    // this.auth2.attachClickHandler(element /*傳進來的HTML元素*/ */, {},
+    // this.auth2.attachClickHandler(element /*傳進來的HTML元素*/ , {},
     //   (googleUser) => {
     //     const profile = googleUser.getBasicProfile();
     //     console.log('Token || ' + googleUser.getAuthResponse().id_token);
@@ -96,5 +98,6 @@ export class LogStatusService {
 
   onLogout() {
     localStorage.clear();
+    this.setLogStatus(false);
   }
 }
