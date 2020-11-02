@@ -8,7 +8,8 @@ declare const gapi: any;
   providedIn: 'root',
 })
 export class LogStatusService {
-  private _loginStatus = new BehaviorSubject<boolean>(this.loadLocalStorage());
+
+  _loginStatus ;
 
   TOKEN = 'accessToken';
   auth2;
@@ -20,6 +21,7 @@ export class LogStatusService {
   }
 
   constructor(private service: ApiService) {
+    this._loginStatus = new BehaviorSubject<boolean>(this.loadLocalStorage());
     this.googleInit();
     const token = localStorage.getItem(this.TOKEN);
     this.getProfileSubscription$ = service.getProfile(token).subscribe({
@@ -61,7 +63,6 @@ export class LogStatusService {
       map((googleUser: any) => {
         const token = googleUser.getAuthResponse().id_token;
         localStorage.setItem(this.TOKEN, token);
-        console.log(token);
       })
     );
     // return from(this.auth2.signIn()).pipe(

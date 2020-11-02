@@ -15,17 +15,17 @@
       <h3>
         <a routerLink="/introduce">{{ sidebarString.introduce }}</a>
       </h3>
-      <h3 *ngIf="showLoginButton">
+      <h3 #loginButton >
         <a (click)="openMask()">{{ sidebarString.login }}</a>
       </h3>
-      <h3 *ngIf="!showLoginButton">
+      <h3 #logoutButton>
         <a (click)="clickLogout()">{{ sidebarString.logout }}</a>
       </h3>
     </div>
   </div>
 
   <!-- 遮罩 -->
-  <div id="mask" *ngIf="showMask">
+  <div #mask id="mask">
     <div id="loginBlock">
       <div class="closeIcon" (click)="closeMask()">
         <img src="../assets/close.png" />
