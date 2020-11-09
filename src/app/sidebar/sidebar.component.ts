@@ -60,7 +60,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   // 遮罩關閉
   closeMask() {
     // this.showMask = false;
-    this.setMaskAndButton(this.mask,true);
+    this.setMaskAndButton(this.mask,false);
   }
 
   // 按下GOOGLE登入鈕
